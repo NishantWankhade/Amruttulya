@@ -1,3 +1,4 @@
+import 'package:ashwini_amruttulya/Global/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
@@ -12,6 +13,10 @@ class ItemsScreen extends StatefulWidget {
 }
 
 class _ItemsScreenState extends State<ItemsScreen> {
+  final _itemController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _qntController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +31,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextField(
-                  controller: TextEditingController(),
+                  controller: _itemController,
                   decoration: InputDecoration(
                     hintText: 'Enter the Item',
                     labelText: 'Item',
@@ -39,8 +44,24 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
             Expanded(
               flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  controller: _priceController,
+                  decoration: InputDecoration(
+                    hintText: 'Price',
+                    labelText: 'Price',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
               child: NumberInputWithIncrementDecrement(
-                controller: TextEditingController(),
+                controller: _qntController,
                 initialValue: 1,
                 numberFieldDecoration: InputDecoration(
                   border: InputBorder.none,
@@ -71,7 +92,74 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
           ],
         ),
+        Expanded(
+          child: ItemList(itmName: _itemController, price: _priceController),
+        ),
+        Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Add"),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ElevatedButton(
+                  child: Text(
+                    "Proceed",
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
+    );
+  }
+}
+
+class ItemList extends StatelessWidget {
+  const ItemList({
+    super.key,
+    this.itmName,
+    this.price,
+  });
+  final itmName;
+  final price;
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount:
+              MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 5
+                  : 3,
+        ),
+        itemCount: itmList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              child: Text('${itmList.keys.elementAt(index)}'),
+              onPressed: () {
+                itmName.text = itmList.keys.elementAt(index).toString();
+                price.text = itmList.values.elementAt(index).toString();
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
