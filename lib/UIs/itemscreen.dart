@@ -112,7 +112,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 padding: const EdgeInsets.all(5.0),
                 child: ElevatedButton(
                   child: Text(
-                    "Proceed",
+                    "View",
                   ),
                   onPressed: () {},
                 ),
