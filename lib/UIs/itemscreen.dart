@@ -141,12 +141,21 @@ void add_Item(
   new_itm.itm_qnt = int.parse(_qntController.text);
 
   if (new_itm.itm_name == Null ||
+      new_itm.itm_name == "" ||
       new_itm.itm_price == Null ||
       new_itm.itm_qnt == Null) {
-      
     return;
   }
-  current_transaction.add(new_itm);
+
+  if (current_transaction.containsKey(new_itm.itm_name)) {
+    final prev_itm = current_transaction[new_itm.itm_name];
+    int prev_qnt = prev_itm!.itm_qnt + new_itm.itm_qnt;
+    prev_itm.itm_qnt = prev_qnt;
+
+    current_transaction[new_itm.itm_name] = prev_itm;
+  } else {
+    current_transaction[new_itm.itm_name] = new_itm;
+  }
 }
 
 /// This Class returns a GridView widget on the basis of the list of items {itmList}
@@ -177,10 +186,12 @@ class ItemList extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Color(
-                    0xFF760000)), // Set background color of button to dark brown 0xFF9c7e63,0xFF5b191a
-                foregroundColor: MaterialStateProperty.all<Color>(Color(
-                    0xFFfefdff)), // Set text color of button 0xFF50221c,0xFFe0cacb
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Color(0xFF760000),
+                ), // Set background color of button to dark brown 0xFF9c7e63,0xFF5b191a
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  Color(0xFFfefdff),
+                ), // Set text color of button 0xFF50221c,0xFFe0cacb
               ),
               child: Text('${itmList.keys.elementAt(index)}'),
               onPressed: () {

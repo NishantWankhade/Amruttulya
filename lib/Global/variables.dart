@@ -22,4 +22,4 @@ var itmList = {
   "Masala Dudh": 30,
 };
 
-List<Item> current_transaction = [];
+Map<String,Item> current_transaction = {};

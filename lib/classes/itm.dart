@@ -1,5 +1,5 @@
 class Item {
-  String? itm_name;
-  int? itm_price;
-  int? itm_qnt;
+  late String itm_name;
+  late int itm_price;
+  late int itm_qnt;
 }
