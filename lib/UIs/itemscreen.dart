@@ -1,4 +1,5 @@
 import 'package:ashwini_amruttulya/Global/variables.dart';
+import 'package:ashwini_amruttulya/classes/itm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
@@ -102,7 +103,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    add_Item(_itemController, _priceController, _qntController);
+                  },
                   child: Text("Add"),
                 ),
               ),
@@ -126,6 +129,27 @@ class _ItemsScreenState extends State<ItemsScreen> {
   }
 }
 
+///Function to add the current item in list of current_transactions
+void add_Item(
+  TextEditingController _itemController,
+  TextEditingController _priceController,
+  TextEditingController _qntController,
+) {
+  Item new_itm = Item();
+  new_itm.itm_name = _itemController.text;
+  new_itm.itm_price = int.parse(_priceController.text);
+  new_itm.itm_qnt = int.parse(_qntController.text);
+
+  if (new_itm.itm_name == Null ||
+      new_itm.itm_price == Null ||
+      new_itm.itm_qnt == Null) {
+      
+    return;
+  }
+  current_transaction.add(new_itm);
+}
+
+/// This Class returns a GridView widget on the basis of the list of items {itmList}
 class ItemList extends StatelessWidget {
   const ItemList({
     super.key,

@@ -1,3 +1,5 @@
+import '../classes/itm.dart';
+
 var itmList = {
   "Regular Chai": 10,
   "Sugar Free Chai": 15,
@@ -19,3 +21,5 @@ var itmList = {
   "Keshar Pista Badam Dudh": 30,
   "Masala Dudh": 30,
 };
+
+List<Item> current_transaction = [];
