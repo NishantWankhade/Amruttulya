@@ -27,9 +27,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              flex: 6,
+              flex: 5,
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 child: TextField(
                   controller: _itemController,
                   decoration: InputDecoration(
@@ -43,9 +43,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 10.0),
                 child: TextField(
                   controller: _priceController,
                   decoration: InputDecoration(
@@ -59,7 +59,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: NumberInputWithIncrementDecrement(
                 controller: _qntController,
                 initialValue: 1,
@@ -108,6 +108,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               ),
             ),
             Expanded(
+              flex: 2,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: ElevatedButton(
@@ -151,6 +152,12 @@ class ItemList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Color(
+                    0xFF760000)), // Set background color of button to dark brown 0xFF9c7e63,0xFF5b191a
+                foregroundColor: MaterialStateProperty.all<Color>(Color(
+                    0xFFfefdff)), // Set text color of button 0xFF50221c,0xFFe0cacb
+              ),
               child: Text('${itmList.keys.elementAt(index)}'),
               onPressed: () {
                 itmName.text = itmList.keys.elementAt(index).toString();
