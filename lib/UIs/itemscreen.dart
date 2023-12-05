@@ -14,6 +14,12 @@ class ItemsScreen extends StatefulWidget {
   State<ItemsScreen> createState() => _ItemsScreenState();
 }
 
+/// Widget contains :-
+/// Column Widget
+/// 1st Child -- Row
+/// 2nd Child -- Gridview
+/// 3rd Child -- Row
+///
 class _ItemsScreenState extends State<ItemsScreen> {
   final _itemController = TextEditingController();
   final _priceController = TextEditingController();
@@ -28,6 +34,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            ///Input field for Item name
             Expanded(
               flex: 5,
               child: Padding(
@@ -44,6 +51,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 ),
               ),
             ),
+
+            ///Input field for Price of item
             Expanded(
               flex: 2,
               child: Padding(
@@ -61,6 +70,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               ),
             ),
 
+            /// Input field for Quantity of item
             Expanded(
               flex: 2,
               child: Padding(
@@ -68,6 +78,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: NumberInputWithIncrementDecrement(
                   controller: _qntController,
                   initialValue: 1,
+                  isInt: true,
                   numberFieldDecoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
@@ -105,7 +116,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     current_transaction.clear();
-                    setState(() {});
+                    setState(() {
+                      clearFields();
+                    });
                   },
                   child: const Icon(Icons.refresh_rounded),
                 ),
@@ -113,9 +126,17 @@ class _ItemsScreenState extends State<ItemsScreen> {
             )
           ],
         ),
+
+        ///Widget for generating the Gridview of items
         Expanded(
-          child: ItemList(itmName: _itemController, price: _priceController),
+          child: ItemList(
+            itmName: _itemController,
+            price: _priceController,
+            qnt: _qntController,
+          ),
         ),
+
+        /// Row with Add and View Btn
         Row(
           children: [
             Expanded(
@@ -125,7 +146,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     add_Item(_itemController, _priceController, _qntController);
-                    setState(() {});
+                    setState(() {
+                      clearFields();
+                    });
                   },
                   child: Text("Add"),
                 ),
@@ -144,7 +167,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
                           "View",
                         ),
                         onPressed: () {
-                          print(current_transaction);
                           // Check if an item is selected
                           if (_itemController.text.isEmpty) {
                             // Show a dialog if no item is selected
@@ -214,6 +236,12 @@ class _ItemsScreenState extends State<ItemsScreen> {
       ],
     );
   }
+
+  void clearFields() {
+    _itemController.clear();
+    _priceController.clear();
+    _qntController.text = "1";
+  }
 }
 
 ///Function to add the current item in list of current_transactions
@@ -251,9 +279,11 @@ class ItemList extends StatelessWidget {
     super.key,
     this.itmName,
     this.price,
+    this.qnt,
   });
   final itmName;
   final price;
+  final qnt;
 
   @override
   Widget build(BuildContext context) {
