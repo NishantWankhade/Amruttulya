@@ -168,7 +168,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                         ),
                         onPressed: () {
                           // Check if an item is selected
-                          if (_itemController.text.isEmpty) {
+                          if (current_transaction.isEmpty) {
                             // Show a dialog if no item is selected
                             showDialog(
                               context: context,
