@@ -3,6 +3,7 @@ import 'package:ashwini_amruttulya/classes/itm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
+import 'summary.dart';
 
 class ItemsScreen extends StatefulWidget {
   const ItemsScreen({
@@ -118,7 +119,48 @@ class _ItemsScreenState extends State<ItemsScreen> {
                   child: Text(
                     "View",
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // Check if an item is selected
+                    if (_itemController.text.isEmpty) {
+                      // Show a dialog if no item is selected
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Please select an item'),
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Close the dialog
+                                },
+                                child: Text('OK'),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color(0xFF760000)),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color(0xFFfefdff)),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // Navigate to the Summary screen if an item is selected
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Summary(
+                            itemName: _itemController.text,
+                            price: _priceController.text,
+                            quantity: _qntController.text,
+                          ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
