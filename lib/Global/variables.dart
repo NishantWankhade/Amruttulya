@@ -1,5 +1,6 @@
 import '../classes/itm.dart';
 
+///List of all the Fixed Items
 var itmList = {
   "Regular Chai": 10,
   "Sugar Free Chai": 15,
@@ -22,4 +23,6 @@ var itmList = {
   "Masala Dudh": 30,
 };
 
+
+///This is a global variable which will store the details of Item in current order
 Map<String,Item> current_transaction = {};

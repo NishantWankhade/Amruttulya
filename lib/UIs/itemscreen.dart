@@ -62,34 +62,37 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
             Expanded(
               flex: 2,
-              child: NumberInputWithIncrementDecrement(
-                controller: _qntController,
-                initialValue: 1,
-                numberFieldDecoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-                widgetContainerDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(
-                    width: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: NumberInputWithIncrementDecrement(
+                  controller: _qntController,
+                  initialValue: 1,
+                  numberFieldDecoration:const InputDecoration(
+                    border: InputBorder.none,
                   ),
-                ),
-                incIconDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                  widgetContainerDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                      width: 2,
+                    ),
                   ),
-                ),
-                separateIcons: true,
-                decIconDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+                  incIconDecoration:const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
                   ),
+                  separateIcons: true,
+                  decIconDecoration:const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  incIconSize: 30,
+                  decIconSize: 30,
+                  incIcon: Icons.add,
+                  decIcon: Icons.remove,
+                  buttonArrangement: ButtonArrangement.incRightDecLeft,
                 ),
-                incIconSize: 30,
-                decIconSize: 30,
-                incIcon: Icons.add,
-                decIcon: Icons.remove,
-                buttonArrangement: ButtonArrangement.incRightDecLeft,
               ),
             ),
           ],
@@ -106,6 +109,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     add_Item(_itemController, _priceController, _qntController);
+                    setState(() {});
                   },
                   child: Text("Add"),
                 ),
@@ -113,55 +117,80 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
             Expanded(
               flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: ElevatedButton(
-                  child: Text(
-                    "View",
-                  ),
-                  onPressed: () {
-                    // Check if an item is selected
-                    if (_itemController.text.isEmpty) {
-                      // Show a dialog if no item is selected
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Please select an item'),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context); // Close the dialog
-                                },
-                                child: Text('OK'),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Color(0xFF760000)),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Color(0xFFfefdff)),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: ElevatedButton(
+                        child: Text(
+                          "View",
+                        ),
+                        onPressed: () {
+                          print(current_transaction);
+                          // Check if an item is selected
+                          if (_itemController.text.isEmpty) {
+                            // Show a dialog if no item is selected
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Please select an item'),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the dialog
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                const Color(0xFF760000)),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                const Color(0xFFfefdff)),
+                                      ),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            // Navigate to the Summary screen if an item is selected
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Summary(
+                                  itemName: _itemController.text,
+                                  price: _priceController.text,
+                                  quantity: _qntController.text,
                                 ),
                               ),
-                            ],
-                          );
+                            );
+                          }
                         },
-                      );
-                    } else {
-                      // Navigate to the Summary screen if an item is selected
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Summary(
-                            itemName: _itemController.text,
-                            price: _priceController.text,
-                            quantity: _qntController.text,
-                          ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color(0xFF760000),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        "${current_transaction.length}",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
