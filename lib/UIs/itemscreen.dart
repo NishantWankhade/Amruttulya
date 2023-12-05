@@ -60,6 +60,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 ),
               ),
             ),
+
             Expanded(
               flex: 2,
               child: Padding(
@@ -67,7 +68,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: NumberInputWithIncrementDecrement(
                   controller: _qntController,
                   initialValue: 1,
-                  numberFieldDecoration:const InputDecoration(
+                  numberFieldDecoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
                   widgetContainerDecoration: BoxDecoration(
@@ -76,13 +77,13 @@ class _ItemsScreenState extends State<ItemsScreen> {
                       width: 2,
                     ),
                   ),
-                  incIconDecoration:const BoxDecoration(
+                  incIconDecoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
                     ),
                   ),
                   separateIcons: true,
-                  decIconDecoration:const BoxDecoration(
+                  decIconDecoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
                     ),
@@ -95,6 +96,21 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 ),
               ),
             ),
+
+            /// Refresh Button to clear the current order details
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    current_transaction.clear();
+                    setState(() {});
+                  },
+                  child: const Icon(Icons.refresh_rounded),
+                ),
+              ),
+            )
           ],
         ),
         Expanded(
