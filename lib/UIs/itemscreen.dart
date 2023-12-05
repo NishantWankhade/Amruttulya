@@ -200,11 +200,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Summary(
-                                  itemName: _itemController.text,
-                                  price: _priceController.text,
-                                  quantity: _qntController.text,
-                                ),
+                                builder: (context) => Summary(),
                               ),
                             );
                           }
