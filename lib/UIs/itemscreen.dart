@@ -35,8 +35,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ///Input field for Item name
-            Expanded(
-              flex: 5,
+            Flexible(
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 child: TextField(
@@ -53,7 +53,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
 
             ///Input field for Price of item
-            Expanded(
+            Flexible(
               flex: 2,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 10.0),
@@ -71,7 +71,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
 
             /// Input field for Quantity of item
-            Expanded(
+            Flexible(
               flex: 2,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -109,7 +109,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
 
             /// Refresh Button to clear the current order details
-            Expanded(
+            Flexible(
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
@@ -128,7 +128,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
         ),
 
         ///Widget for generating the Gridview of items
-        Expanded(
+        Flexible(
           child: ItemList(
             itmName: _itemController,
             price: _priceController,
@@ -154,8 +154,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
+            Flexible(
+              flex: 1,
               child: Stack(
                 children: <Widget>[
                   Container(

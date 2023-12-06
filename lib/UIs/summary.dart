@@ -24,17 +24,26 @@ class Summary extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Item Name',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    'Item Name',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  'Qnt',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Qnt',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  'Price',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Price',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -105,29 +114,29 @@ class Summary extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Use Tooltip for Item Name with a specific region and scrolling
-          Container(
-            width: 150, // Adjust as needed
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Tooltip(
-                message: title,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  ),
-                ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               ),
             ),
           ),
-          Text(
-            quantity,
-            style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+          Expanded(
+            flex: 1,
+            child: Text(
+              quantity,
+              style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            value,
-            style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+          Expanded(
+            flex: 1,
+            child: Text(
+              value,
+              style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
