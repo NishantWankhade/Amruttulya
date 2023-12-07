@@ -1,12 +1,13 @@
+import 'dart:io';
+import 'package:ashwini_amruttulya/excelProcess/addToExcel.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
-import 'package:ashwini_amruttulya/classes/itm.dart'
-    as custom_item; // alias 'custom_item' for clarity
+import 'package:ashwini_amruttulya/classes/itm.dart' as custom_item;
 import 'package:ashwini_amruttulya/Global/variables.dart';
 
 class Summary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Calculate total price based on current order details
     double totalPrice = calculateTotalPrice();
 
     return Scaffold(
@@ -73,9 +74,7 @@ class Summary extends StatelessWidget {
             // Confirm Order Button
             ElevatedButton(
               onPressed: () {
-                // Add your logic for confirming the order
-                // This is just a placeholder for demonstration purposes
-                print('Order Confirmed');
+                storeToExcel();
               },
               child: Text('Confirm Order'),
               style: ElevatedButton.styleFrom(
