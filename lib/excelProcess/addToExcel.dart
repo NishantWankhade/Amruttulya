@@ -3,7 +3,7 @@ import '../storage/externalStorage.dart' as storage;
 
 import '../Global/variables.dart';
 
-Future<void> storeToExcel() async {
+Future<bool> storeToExcel() async {
   var bytes = await storage.readExcel();
   print("Completed Reading");
 
@@ -57,7 +57,9 @@ Future<void> storeToExcel() async {
 
   if (fileBytes.isNotEmpty) {
     storage.writeExcel(fileBytes);
+    return true;
   }
+  return false;
 }
 
 int findItm(String name, Sheet sheetObject) {

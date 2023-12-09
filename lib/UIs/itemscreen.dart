@@ -27,6 +27,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -36,7 +37,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
           children: [
             ///Input field for Item name
             Flexible(
-              flex: 4,
+              flex: 2,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 child: TextField(
@@ -54,7 +55,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
 
             ///Input field for Price of item
             Flexible(
-              flex: 2,
+              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 10.0),
                 child: TextField(
@@ -111,17 +112,14 @@ class _ItemsScreenState extends State<ItemsScreen> {
             /// Refresh Button to clear the current order details
             Flexible(
               flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    current_transaction.clear();
-                    setState(() {
-                      clearFields();
-                    });
-                  },
-                  child: const Icon(Icons.refresh_rounded),
-                ),
+              child: IconButton(
+                onPressed: () {
+                  current_transaction.clear();
+                  setState(() {
+                    clearFields();
+                  });
+                },
+                icon: const Icon(Icons.refresh_rounded),
               ),
             )
           ],
@@ -140,7 +138,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
         Row(
           children: [
             Expanded(
-              flex: 4,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: ElevatedButton(

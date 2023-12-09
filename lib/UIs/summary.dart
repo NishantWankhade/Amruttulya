@@ -73,8 +73,12 @@ class Summary extends StatelessWidget {
 
             // Confirm Order Button
             ElevatedButton(
-              onPressed: () {
-                storeToExcel();
+              onPressed: () async {
+                var stored = await storeToExcel();
+                if (stored == true) {
+                  current_transaction.clear();
+                  Navigator.of(context).pop();
+                }
               },
               child: Text('Confirm Order'),
               style: ElevatedButton.styleFrom(
