@@ -1,7 +1,7 @@
 import '../classes/itm.dart';
 
 ///List of all the Fixed Items
-var itmList = {
+var itmAndPrice = {
   "Regular Chai": 10,
   "Sugar Free Chai": 15,
   "Kulhaad Chai": 15,
@@ -39,5 +39,5 @@ Map<int, String> month = {
   9: "Sep",
   10: "Oct",
   11: "Nov",
-  12: "Dec"
+  12: "Dec",
 };

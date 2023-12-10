@@ -291,7 +291,7 @@ class ItemList extends StatelessWidget {
                   ? 5
                   : 3,
         ),
-        itemCount: itmList.length,
+        itemCount: itmAndPrice.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -304,10 +304,10 @@ class ItemList extends StatelessWidget {
                   Color(0xFFfefdff),
                 ), // Set text color of button 0xFF50221c,0xFFe0cacb
               ),
-              child: Text('${itmList.keys.elementAt(index)}'),
+              child: Text('${itmAndPrice.keys.elementAt(index)}'),
               onPressed: () {
-                itmName.text = itmList.keys.elementAt(index).toString();
-                price.text = itmList.values.elementAt(index).toString();
+                itmName.text = itmAndPrice.keys.elementAt(index).toString();
+                price.text = itmAndPrice.values.elementAt(index).toString();
               },
             ),
           );
