@@ -8,60 +8,32 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../Global/variables.dart';
 
 class PieChartPage extends StatefulWidget {
-  const PieChartPage({super.key});
+  const PieChartPage({
+    super.key,
+    required this.chartItms,
+  });
+  final List<Item> chartItms;
 
   @override
-  State<PieChartPage> createState() => _PieChartPageState();
+  State<PieChartPage> createState() => _PieChartPageState(chartItms: chartItms);
 }
 
 class _PieChartPageState extends State<PieChartPage> {
-  var excel;
-  late Sheet sheetObj;
+  _PieChartPageState({required this.chartItms});
+  List<Item> chartItms;
+
   var loaded;
   String status = "Loading...";
-  List<Item> chartItms = [];
   Random random = Random();
-  String _day = DateTime.now().day.toString();
-  String _month = month[DateTime.now().month].toString();
   String _date = "";
 
   @override
   void initState() {
-    showChart();
-  }
-
-  Future<void> showChart() async {
-    setState(() {
-      loaded = false;
-      chartItms.clear();
-    });
-    var bytes = await readExcel();
-    excel = Excel.decodeBytes(bytes);
-
-    _date = _day + "-" + _month;
-
-    sheetObj = excel["${DateTime.now().day}_${month[DateTime.now().month]}"];
-
-    int row = sheetObj.maxRows;
-
-    if (row < 1) {
+    if (chartItms.length != 0) {
       setState(() {
-        status = "No Data";
         loaded = true;
       });
-      return;
     }
-
-    for (int i = 1; i < row; i++) {
-      Item value = Item();
-
-      value.itm_name = sheetObj.row(i)[0]!.value.toString();
-      value.itm_qnt = int.parse(sheetObj.row(i)[1]!.value.toString());
-      chartItms.add(value);
-    }
-    setState(() {
-      loaded = true;
-    });
   }
 
   @override

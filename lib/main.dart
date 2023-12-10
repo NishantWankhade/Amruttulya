@@ -1,4 +1,4 @@
-import 'package:ashwini_amruttulya/UIs/pieChart.dart';
+import 'package:ashwini_amruttulya/UIs/excelListPage.dart';
 import 'package:flutter/material.dart';
 import 'UIs/itemscreen.dart';
 
@@ -47,11 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PieChartPage(),
+                    builder: (context) => ExcelListPage(),
                   ),
                 );
               },
-              icon: Icon(Icons.pie_chart_rounded),
+              icon: Icon(Icons.list_alt_rounded),
             ),
           ),
         ],
