@@ -1,4 +1,7 @@
-var itmList = {
+import '../classes/itm.dart';
+
+///List of all the Fixed Items
+var itmAndPrice = {
   "Regular Chai": 10,
   "Sugar Free Chai": 15,
   "Kulhaad Chai": 15,
@@ -18,4 +21,23 @@ var itmList = {
   "Born(Milk) Dudh": 30,
   "Keshar Pista Badam Dudh": 30,
   "Masala Dudh": 30,
+};
+
+///This is a global variable which will store the details of Item in current order
+Map<String, Item> current_transaction = {};
+
+///Month mapping to numbers
+Map<int, String> month = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "July",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
 };

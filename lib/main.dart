@@ -1,3 +1,4 @@
+import 'package:ashwini_amruttulya/UIs/excelListPage.dart';
 import 'package:flutter/material.dart';
 import 'UIs/itemscreen.dart';
 
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Amruttulya',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Ashwini Amruttulya'),
+      home: MyHomePage(title: 'Ashwini Amruttulya'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -38,6 +39,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ExcelListPage(),
+                  ),
+                );
+              },
+              icon: Icon(Icons.list_alt_rounded),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: ItemsScreen(),
