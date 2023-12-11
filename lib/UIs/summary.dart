@@ -75,7 +75,8 @@ class Summary extends StatelessWidget {
                 var stored = await storeToExcel();
                 if (stored == true) {
                   current_transaction.clear();
-                  Navigator.of(context).pop();
+
+                  Navigator.pop(context, true);
                 }
               },
               child: Text('Confirm Order'),

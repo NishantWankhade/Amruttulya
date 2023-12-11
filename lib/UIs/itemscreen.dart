@@ -27,7 +27,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {});
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -144,9 +143,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     add_Item(_itemController, _priceController, _qntController);
-                    setState(() {
-                      clearFields();
-                    });
+                    clearFields();
+                    setState(() {});
                   },
                   child: Text("Add"),
                 ),
@@ -194,13 +192,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                               },
                             );
                           } else {
-                            // Navigate to the Summary screen if an item is selected
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Summary(),
-                              ),
-                            );
+                            _navigateToSummary(context);
                           }
                         },
                       ),
@@ -229,6 +221,22 @@ class _ItemsScreenState extends State<ItemsScreen> {
         ),
       ],
     );
+  }
+
+  Future<void> _navigateToSummary(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      // Create the SelectionScreen in the next step.
+      MaterialPageRoute(builder: (context) => Summary()),
+    );
+
+    if (!mounted) return;
+
+    if (result) {
+      setState(() {});
+    }
   }
 
   void clearFields() {
@@ -302,7 +310,7 @@ class ItemList extends StatelessWidget {
                 ), // Set background color of button to dark brown 0xFF9c7e63,0xFF5b191a
                 foregroundColor: MaterialStateProperty.all<Color>(
                   Color(0xFFfefdff),
-                ), // Set text color of button 0xFF50221c,0xFFe0cacb
+                ),
               ),
               child: Text('${itmAndPrice.keys.elementAt(index)}'),
               onPressed: () {
