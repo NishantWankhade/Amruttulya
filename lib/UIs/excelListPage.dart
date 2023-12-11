@@ -65,7 +65,7 @@ class _ExcelListPageState extends State<ExcelListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Total Sales on ${_date}"),
+        title: Text("Total Sales"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
           Padding(
@@ -89,16 +89,31 @@ class _ExcelListPageState extends State<ExcelListPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(
+              _date,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Expanded(
-              child: ListView.builder(
-                itemCount: chartItms.length,
-                itemBuilder: (context, index) {
-                  Item item = chartItms[index];
-                  return buildListRow(item.itm_name, item.itm_qnt.toString());
-                },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: chartItms.length,
+                      itemBuilder: (context, index) {
+                        Item item = chartItms[index];
+                        return buildListRow(
+                            item.itm_name, item.itm_qnt.toString());
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
