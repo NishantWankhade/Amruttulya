@@ -1,4 +1,3 @@
-import 'package:ashwini_amruttulya/UIs/pieChart.dart';
 import 'package:ashwini_amruttulya/classes/itm.dart';
 import 'package:ashwini_amruttulya/storage/externalStorage.dart';
 import 'package:excel/excel.dart';
@@ -84,22 +83,6 @@ class _ExcelListPageState extends State<ExcelListPage> {
                 });
               },
               icon: Icon(Icons.date_range_rounded),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PieChartPage(
-                      chartItms: this.chartItms,
-                    ),
-                  ),
-                );
-              },
-              icon: Icon(Icons.pie_chart_rounded),
             ),
           ),
         ],
