@@ -25,10 +25,10 @@ class _ExcelListPageState extends State<ExcelListPage> {
 
   @override
   void initState() {
-    showChart();
+    showChart(_day, _month);
   }
 
-  Future<void> showChart() async {
+  Future<void> showChart(day, month) async {
     setState(() {
       loaded = false;
       chartItms.clear();
@@ -36,16 +36,15 @@ class _ExcelListPageState extends State<ExcelListPage> {
     var bytes = await readExcel();
     excel = Excel.decodeBytes(bytes);
 
-    _date = _day + "/" + _month;
+    _date = day + "/" + month;
 
-    sheetObj = excel["${DateTime.now().day}_${month[DateTime.now().month]}"];
+    sheetObj = excel["${day}_${month}"];
 
     int row = sheetObj.maxRows;
 
     if (row < 1) {
       setState(() {
         status = "No Data";
-        loaded = true;
       });
       return;
     }
@@ -57,6 +56,7 @@ class _ExcelListPageState extends State<ExcelListPage> {
       value.itm_qnt = int.parse(sheetObj.row(i)[1]!.value.toString());
       chartItms.add(value);
     }
+    print(chartItms.length);
     setState(() {
       loaded = true;
     });
@@ -69,6 +69,23 @@ class _ExcelListPageState extends State<ExcelListPage> {
         title: Text("Total Sales on ${_date}"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () async {
+                DateTime? time = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2023, 12, 2),
+                  lastDate: DateTime.now(),
+                );
+                setState(() {
+                  showChart(time!.day.toString(), month[time.month]);
+                });
+              },
+              icon: Icon(Icons.date_range_rounded),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
