@@ -4,6 +4,12 @@
 An Android application made using Flutter to store the daily data of the counts of different Chais' [ Tea ]. 
 
 
+
+## App apk
+
+Install the application apk from [link](https://github.com/NishantWankhade/Amruttulya/releases/download/v1.0.0/AshwiniAmruttulya.apk)
+
+**"_Imp. Note_ : After installing app allow it to permission to manage files in storage from settings"**
 ## Visuals and Functionalities
 
 ### Visuals
@@ -15,3 +21,8 @@ An Android application made using Flutter to store the daily data of the counts 
 ### Functionalities 
 
 You can refer to the detail functionalities in [releases](https://github.com/NishantWankhade/Amruttulya/releases/tag/v1.0.0)
+## Authors
+
+- [@NishantWankhade](https://github.com/NishantWankhade)
+
+- [@Tanmay-Giram](https://github.com/Tanmay-Giram)
